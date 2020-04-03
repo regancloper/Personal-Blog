@@ -1,36 +1,43 @@
 import * as React from 'react';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import './scss/app';
+import Blogs from './Blogs';
+import Details from './Details';
+import NewPost from './NewPost';
+import EditPost from './EditPost';
 
-class App extends React.Component<IAppProps, IAppState> {
-	constructor(props: IAppProps) {
-		super(props);
-		this.state = {
-			name: null
-		};
-	}
 
-	async componentDidMount() {
-		try {
-			let r = await fetch('/api/hello');
-			let name = await r.json();
-			this.setState({ name });
-		} catch (error) {
-			console.log(error);
-		}
-	}
+const App: React.FC<IAppProps> = props => {
 
-	render() {
-		return (
-			<main className="container my-5">
-				<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
-			</main>
-		);
-	}
+	return (
+
+
+		<BrowserRouter>
+
+			<nav className="navbar navbar-dark bg-dark">
+				<span className="navbar-brand mb-0 h1">Regan's Blog</span>
+				<ul className="navbar-nav" id="nav-items-right">
+					<li className="nav-item mx-2">
+						<Link to='/' className="nav-link">All Blogs</Link>
+					</li>
+					<li className="nav-item">
+						<Link to='/newpost' className="nav-link">Add Blog</Link>
+					</li>
+				</ul>
+			</nav>
+
+			<Switch>
+				<Route exact path="/" component={Blogs}/>
+				<Route exact path="/details/:id" component={Details} />
+				<Route exact path="/newpost" component={NewPost} />
+				<Route exact path="/edit/:id" component={EditPost} />
+			</Switch>
+		</BrowserRouter>
+
+	);
 }
 
-export interface IAppProps {}
-
-export interface IAppState {
-	name: string;
-}
 
 export default App;
+
+interface IAppProps { }

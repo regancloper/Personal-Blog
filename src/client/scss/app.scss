@@ -2,4 +2,20 @@ $theme-colors: (
     'primary': #0091ea //Covalence Blue!  :D
 );
 
+#nav-items-right {
+    flex-direction: row;
+    margin-left: 1em;
+}
+
+.small-font {
+    font-size: 0.8em;
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
